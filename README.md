@@ -5,7 +5,7 @@ API de gerenciamento de contas bancárias.
 
 ### Requisitos: 
 
-- [ ] Deve ser possível criar uma conta
+- [ x ] Deve ser possível criar uma conta
 - [ ] Deve ser possível buscar o extrato bancário do cliete
 - [ ] Deve ser possível realizar um depósito
 - [ ] Deve ser possível realizar um saque
