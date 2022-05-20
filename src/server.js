@@ -51,6 +51,22 @@ app.get("/statement/:cpf", verifyIfExistsAccountCPF, (request, response) => {
     return response.status(200).send(custumer.statement);
 });
 
+app.post("/deposit/:cpf", verifyIfExistsAccountCPF, (request, response) => {
+    const { custumer } = request;
+    const { description, amount } = request.body;
+
+    const operation = {
+        description,
+        amount,
+        createdAt: new Date(),
+        type: 'credit'
+    }
+
+    custumer.statement.push(operation);
+
+    return response.status(201).send();
+});
+
 app.listen(PORT, () => {
     console.log(`${LOGMSG} Server is running at ${HOST}:${PORT}`)
 });
