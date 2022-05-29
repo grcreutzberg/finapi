@@ -114,6 +114,15 @@ app.get("/statement/date", verifyIfExistsAccountCPF, (request, response) => {
     return response.status(200).send(statement);
 });
 
+app.put("/account", verifyIfExistsAccountCPF, (request, response) => {
+    const { custumer } = request;
+    const { name } = request.body;
+
+    custumer.name = name;
+
+    return response.status(201).send();
+});
+
 app.listen(PORT, () => {
     console.log(`${LOGMSG} Server is running at ${HOST}:${PORT}`)
 });
