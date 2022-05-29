@@ -123,6 +123,12 @@ app.put("/account", verifyIfExistsAccountCPF, (request, response) => {
     return response.status(201).send();
 });
 
+app.get("/account", verifyIfExistsAccountCPF, (request, response) => {
+    const { custumer } = request;
+
+    return response.status(200).send(custumer);
+});
+
 app.listen(PORT, () => {
     console.log(`${LOGMSG} Server is running at ${HOST}:${PORT}`)
 });
