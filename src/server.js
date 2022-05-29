@@ -12,7 +12,7 @@ const customers = [];
 
 //Middleware
 function verifyIfExistsAccountCPF(request, response, next) {
-    const { cpf } = request.params;
+    const { cpf } = request.headers;
 
     const custumer = customers.find(custumer => custumer.cpf === cpf);
 
@@ -58,12 +58,12 @@ app.post("/account", (request, response) => {
     return response.status(201).send({ id });
 });
 
-app.get("/statement/:cpf", verifyIfExistsAccountCPF, (request, response) => {
+app.get("/statement", verifyIfExistsAccountCPF, (request, response) => {
     const { custumer } = request;
     return response.status(200).send(custumer.statement);
 });
 
-app.post("/deposit/:cpf", verifyIfExistsAccountCPF, (request, response) => {
+app.post("/deposit", verifyIfExistsAccountCPF, (request, response) => {
     const { custumer } = request;
     const { description, amount } = request.body;
 
@@ -79,7 +79,7 @@ app.post("/deposit/:cpf", verifyIfExistsAccountCPF, (request, response) => {
     return response.status(201).send();
 });
 
-app.post("/withdraw/:cpf", verifyIfExistsAccountCPF, (request, response) => {
+app.post("/withdraw", verifyIfExistsAccountCPF, (request, response) => {
     const { custumer } = request;
     const { amount } = request.body;
 
@@ -103,7 +103,7 @@ app.post("/withdraw/:cpf", verifyIfExistsAccountCPF, (request, response) => {
     return response.status(201).send();
 });
 
-app.get("/statement/:cpf/date", verifyIfExistsAccountCPF, (request, response) => {
+app.get("/statement/date", verifyIfExistsAccountCPF, (request, response) => {
     const { custumer } = request;
     const { date } = request.query;
 
