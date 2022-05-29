@@ -103,6 +103,17 @@ app.post("/withdraw/:cpf", verifyIfExistsAccountCPF, (request, response) => {
     return response.status(201).send();
 });
 
+app.get("/statement/:cpf/date", verifyIfExistsAccountCPF, (request, response) => {
+    const { custumer } = request;
+    const { date } = request.query;
+
+    const dateFormat = new Date(date + ' 00:00');
+    
+    const statement = custumer.statement.filter((statement) => statement.createdAt === new Date(dateFormat).toDateString());
+
+    return response.status(200).send(statement);
+});
+
 app.listen(PORT, () => {
     console.log(`${LOGMSG} Server is running at ${HOST}:${PORT}`)
 });
